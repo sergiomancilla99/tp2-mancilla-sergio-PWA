@@ -14,11 +14,13 @@ let mostrarRating = d.getElementById("rating");
 let mostrarAnio = d.getElementById("anio");
 let mostrarDatos = d.querySelectorAll(".datos-pelicula");
 let btnFavorito = d.getElementById("btnFavorito");
+const spinner = document.getElementById('spinner');
 // let btnFavoritoBorrar = d.getElementById("btnFavoritoBorrar");
 
 //----------------- BUSCAR PELICULA -------------------------------
 btnBuscar.addEventListener('click', (ev) => {
     ev.preventDefault();
+    showSpinner();
     console.log("ta bien",inputPelicula.value);
 
     buscarPelicula();
@@ -81,6 +83,7 @@ function buscarPelicula() {
                 mostrarAnio.innerHTML = rta.Year;
                 localStorage.setItem('busqueda', JSON.stringify(rta));
                 // btnFavoritoBorrar.setAttribute("data-id", rta.imdbID);
+                showSpinner();
 
             } else {
                 console.log("Algo salio mal",rta);
@@ -129,4 +132,7 @@ window.addEventListener("online", event => {
     console.log("estoy online");
 })
 
+function showSpinner() {
+    spinner.classList.toggle('d-none');
+}
 
