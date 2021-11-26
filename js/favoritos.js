@@ -2,36 +2,41 @@ const d = document;
 let cardsFav = document.getElementById("cards-favoritos");
 
 document.addEventListener("DOMContentLoaded",(ev) => {
-    let favoritos = JSON.parse(localStorage.getItem("favoritos"));
+    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    console.log(favoritos.length);
+    if(favoritos.length !== 0){
+        favoritos.forEach( function (el) {
+            let divCard = d.createElement("div");
+            divCard.className = "card col-8 col-sm-3 m-3";
+            cardsFav.appendChild(divCard);
 
-    favoritos.forEach( function (el) {
-        let divCard = d.createElement("div");
-        divCard.className = "card col-8 col-sm-3 m-3";
-        cardsFav.appendChild(divCard);
+            let img = d.createElement("img");
+            img.src = el.Poster;
+            img.className = "img-fluid card-img-top";
+            divCard.appendChild(img);
 
-        let img = d.createElement("img");
-        img.src = el.Poster;
-        img.className = "img-fluid card-img-top";
-        divCard.appendChild(img);
+            let divCardBody = d.createElement("div");
+            let titulo = d.createElement("h2");
+            titulo.className = "text-dark"
+            titulo.innerHTML = el.Title;
+            divCardBody.appendChild(titulo);
+            divCard.appendChild(divCardBody);
 
-        let divCardBody = d.createElement("div");
-        let titulo = d.createElement("h2");
-        titulo.className = "text-dark"
-        titulo.innerHTML = el.Title;
-        divCardBody.appendChild(titulo);
-        divCard.appendChild(divCardBody);
+            let divCardBody2 = d.createElement("div");
+            let btnEliminar = d.createElement("button");
+            btnEliminar.className = " btn btn-danger w-100 btnBorrar";
+            btnEliminar.setAttribute("data-id", el.imdbID);
+            btnEliminar.id = el.imdbID;
+            btnEliminar.innerHTML = "Eliminar";
 
-        let divCardBody2 = d.createElement("div");
-        let btnEliminar = d.createElement("button");
-        btnEliminar.className = " btn btn-danger w-100 btnBorrar";
-        btnEliminar.setAttribute("data-id", el.imdbID);
-        btnEliminar.id = el.imdbID;
-        btnEliminar.innerHTML = "Eliminar";
+            divCardBody2.appendChild(btnEliminar);
+            divCard.appendChild(divCardBody2);
 
-        divCardBody2.appendChild(btnEliminar);
-        divCard.appendChild(divCardBody2);
+        })
+    } else {
+        console.log("Esta vacio el fav");
+    }
 
-    })
     let btnFavoritoBorrar = d.querySelectorAll(".btnBorrar");
     console.log(btnFavoritoBorrar);
 
