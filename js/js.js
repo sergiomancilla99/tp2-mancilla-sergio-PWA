@@ -27,9 +27,9 @@ const spinner = document.getElementById('spinner');
           } else if (Notification.permission === "granted") {
             // Check whether notification permissions have already been granted;
             // if so, create a notification
-            setTimeout( () => {
+          
                 const notification = new Notification("Hora de comer");
-            }, 3000)
+           
             
             // …
           } else if (Notification.permission !== "denied") {
