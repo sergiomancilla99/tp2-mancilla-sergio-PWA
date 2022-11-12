@@ -17,6 +17,39 @@ let btnFavorito = d.getElementById("btnFavorito");
 const spinner = document.getElementById('spinner');
 // let btnFavoritoBorrar = d.getElementById("btnFavoritoBorrar");
 
+// btn notifiacion
+
+    function noti(){
+        console.log("hola")
+        if (!("Notification" in window)) {
+            // Check if the browser supports notifications
+            alert("This browser does not support desktop notification");
+          } else if (Notification.permission === "granted") {
+            // Check whether notification permissions have already been granted;
+            // if so, create a notification
+            setTimeout( () => {
+                const notification = new Notification("Hora de comer");
+            }, 3000)
+            
+            // …
+          } else if (Notification.permission !== "denied") {
+            // We need to ask the user for permission
+            Notification.requestPermission().then((permission) => {
+              // If the user accepts, let's create a notification
+              if (permission === "granted") {
+                const notification = new Notification("Hi there!");
+                // …
+              }
+            });
+          }
+    }
+const btnNotif = d.querySelector(".notificacion");
+
+btnNotif.addEventListener('click', (ev) => {
+    console.log("aca");
+    noti();
+});
+
 //----------------- BUSCAR PELICULA -------------------------------
 btnBuscar.addEventListener('click', (ev) => {
     ev.preventDefault();
